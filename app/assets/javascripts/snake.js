@@ -11,5 +11,11 @@ var moveSnake = function(snake) {
   return newSnake;
 };
 
+var advanceGame = function() {
+  snake = moveSnake(snake);
+  drawSnake(snake);
+};
+
 var snake = [{ top: 0, left: 0}];
-drawSnake(snake);
+// drawSnake(snake);
+CHUNK.executeNTimesPerSecond(advanceGame, 2);
