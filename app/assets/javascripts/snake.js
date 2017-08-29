@@ -31,6 +31,11 @@ var moveSegment = function(segment) {
   return segment;
 };
 
+var changeDirection = function(direction) {
+  snake[0].direction = direction;
+};
+
 var snake = [{ top: 0, left: 0, direction: "down" }];
 // drawSnake(snake);
 CHUNK.executeNTimesPerSecond(advanceGame, 2);
+CHUNK.onArrowKey(changeDirection);
