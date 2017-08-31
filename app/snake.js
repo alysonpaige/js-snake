@@ -14,21 +14,27 @@ var moveSnake = function(snake) {
 
 var advanceGame = function() {
   snake = moveSnake(snake);
+  if (CHUNK.detectCollisionBetween(snake, CHUNK.gameBoundaries())) {
+    CHUNK.endGame();
+    CHUNK.flashMessage("Whoops! You hit a wall!");
+  }
   drawSnake(snake);
 };
 
 // change to switch statement
 var moveSegment = function(segment) {
-  if (segment.direction === "down") {
-    return { top: segment.top + 1, left: segment.left }
-  } else if (segment.direction === "up") {
-    return { top: segment.top - 1, left: segment.left }
-  } else if (segment.direction === "right" ) {
-    return { top: segment.top, left: segment.left + 1 }
-  } else if (segment.direction === "left" ) {
-    return { top: segment.top, left: segment.left - 1 }
-  }
-  return segment;
+  switch(segment.direction) {
+    case "down":
+      return { top: segment.top + 1, left: segment.left };
+    case "up":
+      return { top: segment.top - 1, left: segment.left };
+    case "right":
+      return { top: segment.top, left: segment.left + 1 }
+    case "left":
+      return { top: segment.top, left: segment.left - 1 }
+    default:
+      return segment;
+  };
 };
 
 var changeDirection = function(direction) {
