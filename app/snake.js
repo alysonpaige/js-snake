@@ -40,6 +40,14 @@ var changeDirection = function(direction) {
   snake[0].direction = direction;
 };
 
+var segmentFurtherForwardThan = function(index, snake) {
+  if (snake[index - 1] === undefined) {
+    return snake[index];
+  } else {
+    return snake[index - 1];
+  };
+};
+
 var snake = [{ top: 1, left: 0, direction: "down" }, { top: 0, left: 0, direction: "down" }];
 // drawSnake(snake);
 CHUNK.executeNTimesPerSecond(advanceGame, 2);
