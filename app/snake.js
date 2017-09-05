@@ -5,13 +5,11 @@ var drawSnake = function(snakeToDraw) {
 };
 
 var moveSnake = function(snake) {
-  var newSnake = [];
-  snake.forEach(function(oldSegment) {
+  return snake.map(function(oldSegment, segmentIndex) {
     var newSegment = moveSegment(oldSegment);
-    newSegment.direction = oldSegment.direction;
-    newSnake.push(newSegment);
+    newSegment.direction = segmentFurtherForwardThan(segmentIndex, snake).direction;
+    return newSegment;
   });
-  return newSnake;
 };
 
 var advanceGame = function() {
@@ -23,7 +21,6 @@ var advanceGame = function() {
   drawSnake(snake);
 };
 
-// change to switch statement
 var moveSegment = function(segment) {
   switch(segment.direction) {
     case "down":
