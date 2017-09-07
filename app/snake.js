@@ -9,7 +9,7 @@ var draw = function(snakeToDraw, apple) {
   var drawableApple = { color: "red", pixels: [apple] };
   var drawableObjects = [drawableSnake, drawableApple];
   CHUNK.draw(drawableObjects);
-}
+};
 
 var moveSegment = function(segment) {
   switch(segment.direction) {
@@ -23,12 +23,12 @@ var moveSegment = function(segment) {
       return { top: segment.top, left: segment.left - 1 }
     default:
       return segment;
-  }
-}
+  };
+};
 
 var segmentFurtherForwardThan = function(index, snake) {
   return snake[index - 1] || snake[index];
-}
+};
 
 var moveSnake = function(snake) {
   return snake.map(function(oldSegment, segmentIndex) {
@@ -36,20 +36,27 @@ var moveSnake = function(snake) {
     newSegment.direction = segmentFurtherForwardThan(segmentIndex, snake).direction;
     return newSegment;
   });
-}
+};
+
+var growSnake = function(snake) {
+  var indexOfLastSegment = snake.length - 1;
+  var lastSegement = snake[indexOfLastSegment];
+  snake.push({ top: lastSegement.top, left: lastSegement.left });
+  return snake;
+};
 
 var advanceGame = function() {
   snake = moveSnake(snake);
   if (CHUNK.detectCollisionBetween(snake, CHUNK.gameBoundaries())) {
     CHUNK.endGame();
     CHUNK.flashMessage("Whoops! you hit a wall!");
-  }
+  };
   draw(snake, apple);
-}
+};
 
 var changeDirection = function(direction) {
   snake[0].direction = direction;
-}
+};
 
 var apple = { top: 8, left: 10 };
 
