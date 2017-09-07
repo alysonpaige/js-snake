@@ -47,9 +47,13 @@ var growSnake = function(snake) {
 
 var advanceGame = function() {
   snake = moveSnake(snake);
+  if (CHUNK.detectCollisionBetween([apple], snake)) {
+    snake = growSnake(snake);
+    apple = CHUNK.randomLocation();
+  };
   if (CHUNK.detectCollisionBetween(snake, CHUNK.gameBoundaries())) {
     CHUNK.endGame();
-    CHUNK.flashMessage("Whoops! you hit a wall!");
+    CHUNK.flashMessage("Game over! You hit a wall.");
   };
   draw(snake, apple);
 };
