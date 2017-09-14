@@ -1,8 +1,4 @@
-// var drawSnake = function(snakeToDraw) {
-//   var drawableSnake = { color: "green", pixels: snake };
-//   var drawableObjects = [drawableSnake];
-//   CHUNK.draw(drawableObjects);
-// };
+// RailsBridge
 
 var draw = function(snakeToDraw, apple) {
   var drawableSnake = { color: "green", pixels: snakeToDraw };
